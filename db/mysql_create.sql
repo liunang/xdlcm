@@ -7,14 +7,7 @@ DROP TABLE IF EXISTS role_auth;
 DROP TABLE IF EXISTS user_role;
 DROP TABLE IF EXISTS menu_auth;
 DROP TABLE IF EXISTS bms_param;
-DROP TABLE IF EXISTS firm_info;
-DROP TABLE IF EXISTS firm_user_info;
-DROP TABLE IF EXISTS product_info;
-DROP TABLE IF EXISTS product_serial;
-DROP TABLE IF EXISTS tag_batch;
-DROP TABLE IF EXISTS tag_info;
-DROP TABLE IF EXISTS comment_info;
-DROP TABLE IF EXISTS key_info;
+DROP TABLE IF EXISTS org_info;
 
 /*==============================================================*/
 /* Table: auth_info 权限信息                                    */
@@ -76,6 +69,8 @@ CREATE TABLE user_info
   sex           VARCHAR(1),
   state         VARCHAR(2),
   register_time VARCHAR(19),
+  org_id        INT,
+  org_path      VARCHAR(50),
   PRIMARY KEY (user_name)
 )
   ENGINE = InnoDB
@@ -146,171 +141,23 @@ CREATE TABLE bms_param
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-/*==============================================================*/
-/* Table: firm_info 厂商信息                                    */
-/*==============================================================*/
-CREATE TABLE firm_info
-(
-  firm_num     VARCHAR(32) NOT NULL,
-  firm_name    VARCHAR(64),
-  contact      VARCHAR(24),
-  telephone    VARCHAR(20),
-  mobile_phone VARCHAR(20),
-  fax          VARCHAR(20),
-  email        VARCHAR(64),
-  address      VARCHAR(256),
-  firm_date    VARCHAR(20),
-  remark       VARCHAR(256),
-  PRIMARY KEY (firm_num)
+CREATE TABLE org_info (
+  org_id         INT(32)      NOT NULL AUTO_INCREMENT,
+  parent_id      INT(32)               DEFAULT NULL,
+  org_code       VARCHAR(30)  NOT NULL,
+  org_name       VARCHAR(100) NOT NULL,
+  org_addr       VARCHAR(100)          DEFAULT NULL,
+  org_manager    VARCHAR(30)           DEFAULT NULL,
+  org_telephone  VARCHAR(20)           DEFAULT NULL,
+  org_path       VARCHAR(50)           DEFAULT NULL,
+  editor         VARCHAR(30)           DEFAULT NULL,
+  approver       VARCHAR(30)           DEFAULT NULL,
+  approval_time  VARCHAR(20)           DEFAULT NULL,
+  last_edit_time VARCHAR(20)           DEFAULT NULL,
+  edit_flag      VARCHAR(1)            DEFAULT NULL,
+  area_code      VARCHAR(30)           DEFAULT NULL,
+  PRIMARY KEY (org_id)
 )
   ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-/*==============================================================*/
-/* Table: firm_user_info 厂商用户信息                           */
-/*==============================================================*/
-CREATE TABLE firm_user_info
-(
-  firm_usr_id   VARCHAR(32) NOT NULL,
-  firm_num      VARCHAR(32),
-  firm_username VARCHAR(32),
-  mobile_phone  VARCHAR(32),
-  email         VARCHAR(32),
-  firm_pwd      VARCHAR(32),
-  register_time VARCHAR(19),
-  PRIMARY KEY (firm_usr_id)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-
-/*==============================================================*/
-/* Table: product_info 产品信息                                 */
-/*==============================================================*/
-CREATE TABLE product_info
-(
-  product_num                   VARCHAR(32) NOT NULL,
-  product_name                  VARCHAR(256),
-  qs_num                        VARCHAR(256),
-  gb_num                        VARCHAR(256),
-  firm_num                      VARCHAR(32),
-  firm_name                     VARCHAR(64),
-  product_type                  VARCHAR(128),
-  product_tech                  VARCHAR(128),
-  shelf_life                    VARCHAR(32),
-  quantity                      VARCHAR(32),
-  ingredient                    VARCHAR(256),
-  production_date               VARCHAR(32),
-  movie_url                     VARCHAR(256),
-  picture_url                   VARCHAR(256),
-  quality_code                  VARCHAR(255),
-  checkout_result               VARCHAR(255),
-  checkout_id                   VARCHAR(255),
-  pro_en_pname                  VARCHAR(255),
-  pro_pin_tro                   VARCHAR(255),
-  pro_note                      VARCHAR(255),
-  commodity_codes               VARCHAR(255),
-  product_images                VARCHAR(255),
-  manufacture_address           VARCHAR(255),
-  institution_code              VARCHAR(255),
-  duty_person                   VARCHAR(255),
-  manufacture_phone             VARCHAR(255),
-  anticounterfeiting_technology VARCHAR(255),
-  fw_msg                        VARCHAR(2048),
-  check_out                     VARCHAR(255),
-  spid                          VARCHAR(64),
-  query_url                     VARCHAR(255),
-  PRIMARY KEY (product_num)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-
-/*==============================================================*/
-/* Table: product_serial 产品序列信息                           */
-/*==============================================================*/
-CREATE TABLE product_serial
-(
-  product_serial_num VARCHAR(256) NOT NULL,
-  product_index      VARCHAR(256),
-  serial_state       VARCHAR(1),
-  serial_init_time   VARCHAR(19),
-  tag_num            VARCHAR(32),
-  firm_num           VARCHAR(32),
-  product_num        VARCHAR(32),
-  PRIMARY KEY (product_serial_num)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-
-/*==============================================================*/
-/* Table: tag_batch 标签批次信息                                */
-/*==============================================================*/
-CREATE TABLE tag_batch
-(
-  batch_id       INT NOT NULL AUTO_INCREMENT,
-  batch_time     VARCHAR(19),
-  batch_sum      VARCHAR(10),
-  batch_operator VARCHAR(20),
-  firm_num       VARCHAR(32),
-  PRIMARY KEY (batch_id)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-
-/*==============================================================*/
-/* Table: tag_info 标签信息                                     */
-/*==============================================================*/
-CREATE TABLE tag_info
-(
-  tag_num           VARCHAR(32) NOT NULL,
-  batch_id          INT,
-  tag_sn            VARCHAR(256),
-  tag_sp            VARCHAR(64),
-  tag_state         VARCHAR(1),
-  tag_init_time     VARCHAR(19),
-  tag_allocate_time VARCHAR(19),
-  tag_key           VARCHAR(256),
-  tag_ciphertext    VARCHAR(256),
-  tag_mac           VARCHAR(256),
-  firm_num          VARCHAR(32),
-  product_num       VARCHAR(256),
-  product_serial    VARCHAR(256),
-  PRIMARY KEY (tag_num)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-
-/*==============================================================*/
-/* Table: comment_info 留言信息表                              */
-/*==============================================================*/
-CREATE TABLE comment_info
-(
-  id              INT NOT NULL AUTO_INCREMENT,
-  telephone       VARCHAR(11),
-  comment_content VARCHAR(225),
-  position        VARCHAR(32),
-  PRIMARY KEY (id)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-/*==============================================================*/
-/* Table: key_info                                              */
-/*==============================================================*/
-CREATE TABLE key_info
-(
-  key_id         INT NOT NULL,
-  key_value      VARCHAR(1024),
-  key_type       VARCHAR(64),
-  tag_num        VARCHAR(32),
-  batch_id       INT,
-  key_ciphertext VARCHAR(1024),
-  key_init_time  VARCHAR(19),
-  PRIMARY KEY (key_id)
-)
-  ENGINE = InnoDB
+  AUTO_INCREMENT = 208
   DEFAULT CHARSET = utf8;

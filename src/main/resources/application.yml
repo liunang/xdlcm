@@ -8,9 +8,9 @@ server:
   #  keyStoreType: PKCS12
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/xdlc?useSSL=false&characterEncoding=utf-8
-    username: xdlc
-    password: xdlc
+    url: jdbc:mysql://localhost:3306/xdlcm?useSSL=false&characterEncoding=utf-8
+    username: xdlcm
+    password: xdlcm
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
