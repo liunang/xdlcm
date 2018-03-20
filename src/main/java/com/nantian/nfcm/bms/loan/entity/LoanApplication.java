@@ -5,8 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "loan_application")
 public class LoanApplication {
-    private int loanId;
-    private Integer orgId;
+    private Long loanId;
+    private String loanJournal;
+    private Long orgId;
     private String orgCode;
     private String orgName;
     private String operator;
@@ -18,21 +19,31 @@ public class LoanApplication {
 
     @Id
     @Column(name = "loan_id")
-    public int getLoanId() {
+    public Long getLoanId() {
         return loanId;
     }
 
-    public void setLoanId(int loanId) {
+    public void setLoanId(Long loanId) {
         this.loanId = loanId;
     }
 
     @Basic
+    @Column(name = "loan_journal")
+    public String getLoanJournal() {
+        return loanJournal;
+    }
+
+    public void setLoanJournal(String loanJournal) {
+        this.loanJournal = loanJournal;
+    }
+
+    @Basic
     @Column(name = "org_id")
-    public Integer getOrgId() {
+    public Long getOrgId() {
         return orgId;
     }
 
-    public void setOrgId(Integer orgId) {
+    public void setOrgId(Long orgId) {
         this.orgId = orgId;
     }
 
