@@ -8,6 +8,8 @@ DROP TABLE IF EXISTS user_role;
 DROP TABLE IF EXISTS menu_auth;
 DROP TABLE IF EXISTS bms_param;
 DROP TABLE IF EXISTS org_info;
+DROP TABLE IF EXISTS loan_journal;
+DROP TABLE IF EXISTS loan_application;
 
 /*==============================================================*/
 /* Table: auth_info 权限信息                                    */
@@ -160,4 +162,45 @@ CREATE TABLE org_info (
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 208
+  DEFAULT CHARSET = utf8;
+
+/*==============================================================*/
+/* Table: loan_application                                      */
+/*==============================================================*/
+CREATE TABLE loan_application
+(
+  loan_id           INT NOT NULL AUTO_INCREMENT,
+  org_id            INT,
+  org_code          VARCHAR(30),
+  org_name          VARCHAR(100),
+  operator          VARCHAR(30),
+  init_time         VARCHAR(20),
+  distribution_time VARCHAR(20),
+  examine_time      VARCHAR(20),
+  return_time       VARCHAR(20),
+  detail            VARCHAR(4000),
+  PRIMARY KEY (loan_id)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+/*==============================================================*/
+/* Table: loan_journal                                          */
+/*==============================================================*/
+CREATE TABLE loan_journal
+(
+  id             INT NOT NULL AUTO_INCREMENT,
+  loan_id        INT,
+  process_name   VARCHAR(32),
+  process_flag   VARCHAR(10),
+  process_result VARCHAR(2),
+  process_user   VARCHAR(32),
+  process_status VARCHAR(2),
+  init_time      VARCHAR(20),
+  finish_time    CHAR(10),
+  last_id        INT,
+  next_id        INT,
+  PRIMARY KEY (id)
+)
+  ENGINE = InnoDB
   DEFAULT CHARSET = utf8;

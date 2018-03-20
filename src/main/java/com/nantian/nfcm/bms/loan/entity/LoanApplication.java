@@ -1,0 +1,118 @@
+package com.nantian.nfcm.bms.loan.entity;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "loan_application")
+public class LoanApplication {
+    private int loanId;
+    private Integer orgId;
+    private String orgCode;
+    private String orgName;
+    private String operator;
+    private String initTime;
+    private String distributionTime;
+    private String examineTime;
+    private String returnTime;
+    private String detail;
+
+    @Id
+    @Column(name = "loan_id")
+    public int getLoanId() {
+        return loanId;
+    }
+
+    public void setLoanId(int loanId) {
+        this.loanId = loanId;
+    }
+
+    @Basic
+    @Column(name = "org_id")
+    public Integer getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(Integer orgId) {
+        this.orgId = orgId;
+    }
+
+    @Basic
+    @Column(name = "org_code")
+    public String getOrgCode() {
+        return orgCode;
+    }
+
+    public void setOrgCode(String orgCode) {
+        this.orgCode = orgCode;
+    }
+
+    @Basic
+    @Column(name = "org_name")
+    public String getOrgName() {
+        return orgName;
+    }
+
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
+    }
+
+    @Basic
+    @Column(name = "operator")
+    public String getOperator() {
+        return operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
+
+    @Basic
+    @Column(name = "init_time")
+    public String getInitTime() {
+        return initTime;
+    }
+
+    public void setInitTime(String initTime) {
+        this.initTime = initTime;
+    }
+
+    @Basic
+    @Column(name = "distribution_time")
+    public String getDistributionTime() {
+        return distributionTime;
+    }
+
+    public void setDistributionTime(String distributionTime) {
+        this.distributionTime = distributionTime;
+    }
+
+    @Basic
+    @Column(name = "examine_time")
+    public String getExamineTime() {
+        return examineTime;
+    }
+
+    public void setExamineTime(String examineTime) {
+        this.examineTime = examineTime;
+    }
+
+    @Basic
+    @Column(name = "return_time")
+    public String getReturnTime() {
+        return returnTime;
+    }
+
+    public void setReturnTime(String returnTime) {
+        this.returnTime = returnTime;
+    }
+
+    @Basic
+    @Column(name = "detail")
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+}
