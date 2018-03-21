@@ -14,8 +14,8 @@ public class LoanJournal {
     private String processStatus;
     private String initTime;
     private String finishTime;
-    private Integer lastId;
-    private Integer nextId;
+    private Long lastId;
+    private Long nextId;
 
     @Id
     @Column(name = "id")
@@ -109,21 +109,21 @@ public class LoanJournal {
 
     @Basic
     @Column(name = "last_id")
-    public Integer getLastId() {
+    public Long getLastId() {
         return lastId;
     }
 
-    public void setLastId(Integer lastId) {
+    public void setLastId(Long lastId) {
         this.lastId = lastId;
     }
 
     @Basic
     @Column(name = "next_id")
-    public Integer getNextId() {
+    public Long getNextId() {
         return nextId;
     }
 
-    public void setNextId(Integer nextId) {
+    public void setNextId(Long nextId) {
         this.nextId = nextId;
     }
 }

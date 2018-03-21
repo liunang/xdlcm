@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS bms_param;
 DROP TABLE IF EXISTS org_info;
 DROP TABLE IF EXISTS loan_journal;
 DROP TABLE IF EXISTS loan_application;
+DROP TABLE IF EXISTS loan_online;
 
 /*==============================================================*/
 /* Table: auth_info 权限信息                                    */
@@ -170,7 +171,7 @@ CREATE TABLE org_info (
 CREATE TABLE loan_application
 (
   loan_id           INT NOT NULL AUTO_INCREMENT,
-  loan_journal    VARCHAR(32),
+  loan_journal      VARCHAR(32),
   org_id            INT,
   org_code          VARCHAR(30),
   org_name          VARCHAR(100),
@@ -201,6 +202,21 @@ CREATE TABLE loan_journal
   finish_time    CHAR(10),
   last_id        INT,
   next_id        INT,
+  PRIMARY KEY (id)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+/*==============================================================*/
+/* Table: loan_online                                           */
+/*==============================================================*/
+CREATE TABLE loan_online
+(
+  id             INT NOT NULL AUTO_INCREMENT,
+  loan_id        INT,
+  process_name   VARCHAR(32),
+  process_status VARCHAR(2),
+  process_user   VARCHAR(32),
   PRIMARY KEY (id)
 )
   ENGINE = InnoDB

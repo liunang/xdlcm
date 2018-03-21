@@ -20,12 +20,12 @@ public class LoanApplicationService {
         this.loanApplicationDao = loanApplicationDao;
     }
 
-    public LoanApplication findById(Long loanId ) throws ServiceException{
+    public LoanApplication findById(Long loanId) throws ServiceException {
         return loanApplicationDao.findOne(loanId);
     }
 
-    public LoanBean addLoanApplication(LoanBean loanBean) throws ServiceException{
-        String loanJournal = DateUtil.getCurrentTime("yyyyMMddHHmmss")+loanBean.getOperator();
+    public LoanBean addLoanApplication(LoanBean loanBean) throws ServiceException {
+        String loanJournal = DateUtil.getCurrentTime("yyyyMMddHHmmss") + loanBean.getOperator();
         LoanInfo loanInfo = loanBean.getLoanInfo();
 
         ObjectMapper mapper = new ObjectMapper();
@@ -37,5 +37,4 @@ public class LoanApplicationService {
         }
         return loanApplicationDao.save(loanBean);
     }
-
 }
